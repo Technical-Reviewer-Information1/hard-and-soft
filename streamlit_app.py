@@ -128,17 +128,25 @@ def create_hardware_diagram(step=0, process_type="計算", data="2+3", result="5
                 showarrow=True
             )
             
-            # データラベル
+            # データラベル - 矢印との重複を避けるため位置を調整
             mid_x = (start_x + end_x) / 2
-            mid_y = (start_y + end_y) / 2 + 0.2
+            mid_y = (start_y + end_y) / 2
+            
+            # 垂直方向の矢印の場合、ラベルを横にずらす
+            if abs(dx) < abs(dy):  # 縦方向の矢印
+                mid_x += 0.5 if dx >= 0 else -0.5
+            else:  # 横方向の矢印
+                mid_y += 0.3 if dy >= 0 else -0.3
+            
             fig.add_annotation(
                 x=mid_x, y=mid_y,
                 text=arrow['label'],
                 showarrow=False,
-                font=dict(size=12, color='red', family='Arial'),
-                bgcolor='white',
+                font=dict(size=12, color='red', family='Arial', weight='bold'),
+                bgcolor='rgba(255,255,255,0.9)',
                 bordercolor='red',
-                borderwidth=1
+                borderwidth=1,
+                borderpad=4
             )
     
     # レイアウト設定
