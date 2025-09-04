@@ -31,11 +31,11 @@ def create_hardware_diagram(step=0, process_type="計算", data="2+3", result="5
     
     # ハードウェアコンポーネントの位置
     components = {
-        'input': {'x': 1, 'y': 4, 'name': '入力装置\n(Input Unit)', 'color': '#FF6B6B'},
-        'control': {'x': 3, 'y': 3, 'name': '制御装置\n(Control Unit)', 'color': '#4ECDC4'},
-        'memory': {'x': 5, 'y': 4, 'name': '記憶装置\n(Memory Unit)', 'color': '#45B7D1'},
-        'alu': {'x': 3, 'y': 1, 'name': '演算装置\n(ALU)', 'color': '#96CEB4'},
-        'output': {'x': 7, 'y': 4, 'name': '出力装置\n(Output Unit)', 'color': '#FFEAA7'}
+        'input': {'x': 1, 'y': 4, 'name': '入力装置', 'color': '#FF6B6B'},
+        'control': {'x': 3, 'y': 3, 'name': '制御装置', 'color': '#4ECDC4'},
+        'memory': {'x': 5, 'y': 4, 'name': '記憶装置', 'color': '#45B7D1'},
+        'alu': {'x': 3, 'y': 1, 'name': '演算装置', 'color': '#96CEB4'},
+        'output': {'x': 7, 'y': 4, 'name': '出力装置', 'color': '#FFEAA7'}
     }
     
     # コンポーネントの描画
@@ -88,49 +88,58 @@ def create_hardware_diagram(step=0, process_type="計算", data="2+3", result="5
         start = components[arrow['start']]
         end = components[arrow['end']]
         
-        # 矢印の線
-        fig.add_trace(go.Scatter(
-            x=[start['x'], end['x']],
-            y=[start['y'], end['y']],
-            mode='lines',
-            line=dict(color='red', width=3),
-            showlegend=False
-        ))
-        
-        # 矢印の先端
+        # 矢印の開始点と終了点を円の境界に調整
         dx = end['x'] - start['x']
         dy = end['y'] - start['y']
         length = np.sqrt(dx**2 + dy**2)
-        dx_norm = dx / length
-        dy_norm = dy / length
         
-        arrow_x = end['x'] - 0.3 * dx_norm
-        arrow_y = end['y'] - 0.3 * dy_norm
-        
-        fig.add_annotation(
-            x=arrow_x, y=arrow_y,
-            ax=start['x'], ay=start['y'],
-            xref='x', yref='y',
-            axref='x', ayref='y',
-            arrowhead=2,
-            arrowsize=1,
-            arrowwidth=2,
-            arrowcolor='red',
-            showarrow=True
-        )
-        
-        # データラベル
-        mid_x = (start['x'] + end['x']) / 2
-        mid_y = (start['y'] + end['y']) / 2
-        fig.add_annotation(
-            x=mid_x, y=mid_y + 0.2,
-            text=arrow['label'],
-            showarrow=False,
-            font=dict(size=12, color='red', family='Arial'),
-            bgcolor='white',
-            bordercolor='red',
-            borderwidth=1
-        )
+        if length > 0:
+            dx_norm = dx / length
+            dy_norm = dy / length
+            
+            # 円の半径（マーカーサイズに基づく調整）
+            radius = 0.4
+            
+            # 開始点と終了点を円の境界に調整
+            start_x = start['x'] + radius * dx_norm
+            start_y = start['y'] + radius * dy_norm
+            end_x = end['x'] - radius * dx_norm
+            end_y = end['y'] - radius * dy_norm
+            
+            # 矢印の線
+            fig.add_trace(go.Scatter(
+                x=[start_x, end_x],
+                y=[start_y, end_y],
+                mode='lines',
+                line=dict(color='red', width=3),
+                showlegend=False
+            ))
+            
+            # 矢印の先端
+            fig.add_annotation(
+                x=end_x, y=end_y,
+                ax=start_x, ay=start_y,
+                xref='x', yref='y',
+                axref='x', ayref='y',
+                arrowhead=2,
+                arrowsize=1.5,
+                arrowwidth=3,
+                arrowcolor='red',
+                showarrow=True
+            )
+            
+            # データラベル
+            mid_x = (start_x + end_x) / 2
+            mid_y = (start_y + end_y) / 2 + 0.2
+            fig.add_annotation(
+                x=mid_x, y=mid_y,
+                text=arrow['label'],
+                showarrow=False,
+                font=dict(size=12, color='red', family='Arial'),
+                bgcolor='white',
+                bordercolor='red',
+                borderwidth=1
+            )
     
     # レイアウト設定
     fig.update_layout(
