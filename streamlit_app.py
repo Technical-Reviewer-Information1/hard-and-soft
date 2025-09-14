@@ -24,6 +24,10 @@ if 'animation_started' not in st.session_state:
     st.session_state.animation_started = False
 if 'selected_process' not in st.session_state:
     st.session_state.selected_process = "簡単な計算"
+if 'auto_play_enabled' not in st.session_state:
+    st.session_state.auto_play_enabled = False
+if 'last_auto_step_time' not in st.session_state:
+    st.session_state.last_auto_step_time = time.time()
 
 def create_hardware_diagram(step=0, process_type="計算", data="2+3", result="5"):
     """ハードウェア構成図とアニメーションを作成"""
@@ -231,21 +235,39 @@ if st.session_state.animation_started:
         if st.button("⏮️ 前のステップ"):
             if st.session_state.processing_step > 0:
                 st.session_state.processing_step -= 1
+                st.session_state.last_auto_step_time = time.time()
     with col2:
         if st.button("▶️ 次のステップ"):
             if st.session_state.processing_step < 5:
                 st.session_state.processing_step += 1
+                st.session_state.last_auto_step_time = time.time()
     with col3:
         if st.button("🔄 リセット"):
             st.session_state.processing_step = 0
+            st.session_state.last_auto_step_time = time.time()
     with col4:
-        auto_play = st.checkbox("自動再生")
-    
+        auto_play = st.checkbox("自動再生", value=st.session_state.auto_play_enabled)
+        if auto_play != st.session_state.auto_play_enabled:
+            st.session_state.auto_play_enabled = auto_play
+            st.session_state.last_auto_step_time = time.time()
+            if auto_play:
+                st.rerun()
+
     # 自動再生
-    if auto_play and st.session_state.processing_step < 5:
-        time.sleep(2)
-        st.session_state.processing_step += 1
-        st.rerun()
+    if st.session_state.auto_play_enabled and st.session_state.processing_step < 5:
+        current_time = time.time()
+        if current_time - st.session_state.last_auto_step_time >= 2:
+            st.session_state.processing_step += 1
+            st.session_state.last_auto_step_time = current_time
+            st.rerun()
+        else:
+            # 次のステップまでの残り時間を表示
+            remaining_time = 2 - (current_time - st.session_state.last_auto_step_time)
+            if remaining_time > 0:
+                placeholder = st.empty()
+                placeholder.text(f"次のステップまで: {remaining_time:.1f}秒")
+                time.sleep(0.1)
+                st.rerun()
     
     # ハードウェア図の表示
     if result:
