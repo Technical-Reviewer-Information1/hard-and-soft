@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # タイトルとキャプション
-st.title("💻 ハードウェアとソフトウェア")
+st.title("ハードウェアとソフトウェア（pp.176-177）")
 st.caption("Created by Dit-Lab.(Daiki ITO)")
 st.caption("Supported by Tomoaki ATSUMI")
 
