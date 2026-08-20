@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ハードウェアとソフトウェア｜情報Ⅰ共通テスト対策問題集</title>
+<meta name="description" content="五大装置の関係図を自分で完成させ、データの流れと制御の流れを目で追いながら整理します。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 fill=%22%2315181c%22/%3E%3Ctext x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22monospace%22 fill=%22%23fff%22 text-anchor=%22middle%22%3E01%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="inner">
+    <span class="eyebrow">第 6 章　コンピュータ　6-1</span>
+    <h1>ハードウェアとソフトウェア（pp.176）</h1>
+    <p class="lead">五大装置の関係図を自分で完成させ、データの流れと制御の流れを目で追いながら整理します。</p>
+    <p class="credit">Created by Dit-Lab.(Daiki ITO)　/　Supported by Tomoaki ATSUMI</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="step" id="step1">
+    <h2><span class="no">STEP 1</span>五大装置の関係図を完成させる（問1）</h2>
+    <p class="desc">空欄をクリックしてから、下の装置名を選びます。<strong>点線＝データの流れ</strong>、<strong>実線＝制御（命令）の流れ</strong>が手がかりです。</p>
+    <div class="panel">
+      <div id="figBox"></div>
+      <p class="qhead" style="margin:14px 0 8px">選んでいる空欄：<span class="mono" id="curBlank">ア</span></p>
+      <div class="choice4" id="figChoices"></div>
+      <div class="note" id="figNote" style="margin-top:10px"></div>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn" id="figReset">やり直す</button>
+        <button class="btn" id="figAns">答えを見る</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" id="step2">
+    <h2><span class="no">STEP 2</span>それぞれの装置の役割</h2>
+    <p class="desc">装置名と役割を結びつけましょう。</p>
+    <div class="panel">
+      <div class="matchgrid" id="roleBox"></div>
+      <div class="note" id="roleNote" style="margin-top:12px"></div>
+    </div>
+  </section>
+
+  <section class="step" id="step3">
+    <h2><span class="no">STEP 3</span>記憶装置を比べる</h2>
+    <p class="desc">「速い・小さい」のが主記憶装置、「遅い・大きい・消えない」のが補助記憶装置です。</p>
+    <div class="panel">
+      <div class="tbl-scroll"><table class="tbl cmp2" id="memTable"></table></div>
+      <hr class="sep">
+      <p class="qhead">SSD と HDD</p>
+      <div class="tbl-scroll"><table class="tbl cmp2" id="ssdTable"></table></div>
+      <div class="note info" style="margin-top:10px">SSDは内部に動く部品がないため、読み書きが速く・消費電力が少なく・衝撃に強いという特徴があります。そのためノートパソコンでよく使われます。</div>
+    </div>
+  </section>
+
+  <section class="step" id="step4">
+    <h2><span class="no">STEP 4</span>ソフトウェアのはたらき</h2>
+    <p class="desc">ハードウェアだけでは動きません。それを動かすのがソフトウェアです。</p>
+    <div class="panel">
+      <div class="grid c2">
+        <div>
+          <div class="tbl-scroll"><table class="tbl" id="swTable"></table></div>
+        </div>
+        <div>
+          <p class="qhead" style="margin:0 0 8px">OSのはたらきを確かめる</p>
+          <div id="osBox"></div>
+          <div class="note" id="osNote" style="margin-top:10px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" id="step5">
+    <h2><span class="no">STEP 5</span>a〜e の記述を判定する（問2）</h2>
+    <div class="panel">
+      <div class="abcde" id="jBox"></div>
+      <div class="note" id="jNote" style="margin-top:12px"></div>
+    </div>
+  </section>
+
+  <section class="step" id="glossary">
+    <h2><span class="no">用語</span>この節で出てくることば</h2>
+    <div class="panel"><div id="glossBox"></div></div>
+  </section>
+
+  <section class="step" id="wrap">
+    <h2><span class="no">まとめ</span>おさえておきたいこと</h2>
+    <div class="panel">
+      <ul class="bullets">
+        <li>五大装置は <strong>入力・出力・記憶・制御・演算</strong>。このうち<strong>制御装置と演算装置をまとめてCPU（中央処理装置）</strong>という。</li>
+        <li>図では<strong>制御の流れがすべての装置に向かっている</strong>のが制御装置、<strong>データの流れの始まり</strong>が入力装置、<strong>終わり</strong>が出力装置。</li>
+        <li>主記憶装置は速いが容量が小さく、<strong>電源を切ると消える</strong>。補助記憶装置は遅いが容量が大きく、<strong>電源を切っても残る</strong>。</li>
+        <li>SSDはHDDより<strong>速く・消費電力が少なく・衝撃に強い</strong>。</li>
+        <li>OSは基本ソフトウェア。<strong>タスク管理・メモリ管理・ファイル管理</strong>を行い、複数のタスクを瞬時に切り替えて動かしている。</li>
+        <li>周辺機器を動かすには、その機器に対応した<strong>デバイスドライバ</strong>が必要。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="step">
+    <h2><span class="no">活用</span>授業・探究での使い方</h2>
+    <div class="use-note">
+      <h3>授業で</h3>
+      <ul>
+        <li>STEP 1 の図を空欄のまま提示し、データの流れと制御の流れの矢印を根拠に当てさせる。</li>
+        <li>STEP 3 で主記憶装置と補助記憶装置の違いを表に整理し、電源を切ったときの違いを強調する。</li>
+        <li>STEP 5 の a〜e は、誤りの記述をどう直せば正しくなるかを言わせる。</li>
+      </ul>
+      <h3 style="margin-top:12px">探究で</h3>
+      <ul>
+        <li>自分のパソコンやスマートフォンのCPU・メモリ・ストレージの容量を調べ、五大装置に対応づける。</li>
+        <li>SSDとHDDの価格・速度・容量を調べ、用途によってどちらを選ぶべきか考える。</li>
+        <li>身のまわりの機器（電子レンジ・信号機など）にも五大装置があるかを考える。</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="app-footer">
+  情報Ⅰ 共通テスト対策問題集（技術評論社）連動Webアプリ　/　Created by Dit-Lab.(Daiki ITO)　/　Supported by Tomoaki ATSUMI
+</footer>
+
+<script src="js/tools.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/terms.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
