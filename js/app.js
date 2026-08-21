@@ -214,6 +214,23 @@
   }
 
   function init() {
+    if (document.getElementById('chkBox')) {
+      window.Quiz.order('chkBox', 'chkNote',
+        [{ k: 'R', t: 'レジスタ' }, { k: 'M', t: '主記憶装置（メモリ）' }, { k: 'S', t: 'SSD' }, { k: 'H', t: 'HDD' }],
+        'RMSH',
+        { tags: ['いちばん速い', '2番目', '3番目', 'いちばん遅い'],
+          why: '<strong>速いものほど容量が小さく、値段が高い</strong>という関係があります。' +
+               'CPUのすぐそばにあるレジスタがいちばん速く、離れるほど遅く・大きくなります。' });
+      window.Quiz.judge('chk2Box', 'chk2Note', [
+        { k: '1', t: '主記憶装置（メモリ）は、電源を切っても内容が残る。', ok: false,
+          why: 'メモリは<strong>電源を切ると消えます</strong>（揮発性）。だから作業中のファイルは保存が必要です。' },
+        { k: '2', t: 'SSDは内部に動く部品がないため、HDDより衝撃に強い。', ok: true,
+          why: 'HDDは円盤を回して読み書きするので、動作中の衝撃に弱いという弱点があります。' },
+        { k: '3', t: '同じ容量なら、ふつうHDDのほうがSSDより高い。', ok: false,
+          why: '逆です。<strong>SSDのほうが高価</strong>で、HDDは容量あたりの値段が安いという長所があります。' }
+      ], '「速い・小さい・高い」と「遅い・大きい・安い」が対になっていることを、下の表でも確かめましょう。');
+    }
+
     $('figReset').addEventListener('click', () => { picked = {}; showAns = false; cur = 'ア'; $('figNote').className = 'note info'; $('figNote').textContent = '空欄をクリックしてから装置名を選びましょう。'; drawFig(); });
     $('figAns').addEventListener('click', () => {
       showAns = true; drawFig();

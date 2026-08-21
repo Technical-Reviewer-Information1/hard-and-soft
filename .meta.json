@@ -6,6 +6,7 @@
  "scripts": [
   "terms.js",
   "worksheet.js",
+  "quiz.js",
   "app.js"
  ],
  "use": {
