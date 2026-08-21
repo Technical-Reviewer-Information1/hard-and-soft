@@ -225,6 +225,30 @@
     drawFig(); drawChoices(); drawRoles(); drawTables(); drawOS(); drawJudge();
     $('figNote').className = 'note info';
     $('figNote').textContent = '空欄をクリックしてから装置名を選びましょう。';
+    Worksheet.make('wsBox', {
+      name: 'hard-and-soft',
+      fields: [
+        { id: 'h1', label: '① 調べた機器', hint: '機種名と、主な使い道。', rows: 2, ph: '例：学校のノートPC。レポート作成と動画編集' },
+        { id: 'h2', label: '② 五大装置にあてはめる', hint: '入力・出力・記憶・演算・制御が、それぞれ何にあたるか。', rows: 3,
+          ph: '例：入力＝キーボードとタッチパッド、出力＝画面、記憶＝メモリとSSD、演算・制御＝CPU' },
+        { id: 'h3', label: '③ OSと応用ソフトウェア', hint: 'OSは何か。よく使うアプリは何か。', rows: 2, ph: '例：OSはWindows。アプリは文書作成ソフトと動画編集ソフト' },
+        { id: 'h4', label: '④ 遅いと感じる場面', hint: 'いつ、どんな作業で。', rows: 2, ph: '例：動画を書き出すときと、アプリを同時に多く開いたとき' },
+        { id: 'h5', label: '⑤ 原因はどこにありそうか', hint: 'CPU／メモリ／記憶装置のどれか。理由も。', rows: 3,
+          ph: '例：同時に開くと遅い→メモリ不足の可能性。書き出しが遅い→CPUの性能' },
+        { id: 'h6', label: '⑥ どう改善するか', hint: '買いかえ以外の方法も考える。', rows: 2, ph: '例：使わないアプリを閉じる／メモリを増設する／保存先を外部SSDにする' }
+      ],
+      build: function (v, e) {
+        return '<h4>機器の構成シート</h4><dl>' +
+          '<dt>① 機器</dt><dd>' + e(v.h1) + '</dd>' +
+          '<dt>② 五大装置</dt><dd>' + e(v.h2) + '</dd>' +
+          '<dt>③ ソフトウェア</dt><dd>' + e(v.h3) + '</dd>' +
+          '<dt>④ 遅いと感じる場面</dt><dd>' + e(v.h4) + '</dd>' +
+          '<dt>⑤ 原因の見立て</dt><dd>' + e(v.h5) + '</dd>' +
+          '<dt>⑥ 改善案</dt><dd>' + e(v.h6) + '</dd></dl>';
+      },
+      note: '④→⑤のように「症状から原因を推測する」練習は、そのままトラブル対応の力になります。'
+    });
+
     window.Terms.attach();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
