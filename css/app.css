@@ -45,3 +45,13 @@ svg .cflow{stroke:#8a5a00;stroke-width:1.4;fill:none;marker-end:url(#ah2)}
 .abcde .st .t{flex:1;min-width:12em}
 .abcde .jb{display:flex;gap:6px}
 .abcde .jb .btn{min-width:3.4em;padding:6px 10px;text-align:center}
+
+/* --- 関係図の「流れ」を動かす --- */
+@keyframes flowdash { to { stroke-dashoffset: -14 } }
+svg.anim .dflow{ animation: flowdash .85s linear infinite }
+svg.anim .cflow{ stroke-dasharray:6 4; animation: flowdash 1.15s linear infinite }
+.figctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.figctl .lg{font-size:.78rem;color:var(--ink-2);display:inline-flex;align-items:center;gap:5px}
+.figctl .lg i{display:inline-block;width:22px;height:0;border-top-width:2px}
+.figctl .lg i.d{border-top-style:dashed;border-top-color:#123a6b}
+.figctl .lg i.c{border-top-style:solid;border-top-color:#8a5a00}

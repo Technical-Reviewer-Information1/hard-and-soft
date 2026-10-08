@@ -15,6 +15,16 @@
   };
   let picked = {}, cur = 'ア', showAns = false;
   const BPOS = { 'ア': [45, 45, 120, 34], 'イ': [45, 115, 120, 34], 'ウ': [420, 60, 120, 34], 'エ': [420, 140, 120, 34] };
+
+  /* 関係図の流れアニメーション */
+  let figAnim = false;
+  function applyFigAnim() {
+    const svg = document.querySelector('#figBox svg');
+    if (svg) svg.classList.toggle('anim', figAnim);
+    const b = $('figPlay');
+    if (b) b.textContent = figAnim ? '■ 止める' : '▶ 流れを動かす';
+  }
+
   function drawFig() {
     const W = 580, H = 230;
     const svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'コンピュータの五大装置の関係図' });
@@ -67,6 +77,7 @@
       svg.appendChild(el('text', { x: p[0] + p[2] / 2, y: p[1] + p[3] / 2, class: 'tx' + (!v && k === cur ? ' w' : '') }, v || k));
     });
     const b = $('figBox'); b.innerHTML = ''; b.appendChild(svg);
+    applyFigAnim();
     $('curBlank').textContent = cur;
   }
   function drawChoices() {
@@ -231,6 +242,7 @@
       ], '「速い・小さい・高い」と「遅い・大きい・安い」が対になっていることを、下の表でも確かめましょう。');
     }
 
+    $('figPlay').addEventListener('click', () => { figAnim = !figAnim; applyFigAnim(); });
     $('figReset').addEventListener('click', () => { picked = {}; showAns = false; cur = 'ア'; $('figNote').className = 'note info'; $('figNote').textContent = '空欄をクリックしてから装置名を選びましょう。'; drawFig(); });
     $('figAns').addEventListener('click', () => {
       showAns = true; drawFig();

@@ -3,6 +3,11 @@
     <p class="desc">空欄をクリックしてから、下の装置名を選びます。<strong>点線＝データの流れ</strong>、<strong>実線＝制御（命令）の流れ</strong>が手がかりです。</p>
     <div class="panel">
       <div id="figBox"></div>
+      <div class="figctl">
+        <button class="btn primary" id="figPlay">▶ 流れを動かす</button>
+        <span class="lg"><i class="d"></i>データの流れ</span>
+        <span class="lg"><i class="c"></i>制御（命令）の流れ</span>
+      </div>
       <p class="pq" style="margin:14px 0 8px">選んでいる空欄：<span class="mono" id="curBlank">ア</span></p>
       <div class="choice4" id="figChoices"></div>
       <div class="note" id="figNote" style="margin-top:10px"></div>
